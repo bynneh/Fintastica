@@ -6,7 +6,9 @@
           <h1 class="text-xl">Log in</h1>
           <div class="ml-4 text-sm text-neutral-500">
             Don't have an account?
-            <NuxtLink to="/signup" class="text-white hover:text-mainGreen-400"
+            <NuxtLink
+              to="/signup"
+              class="text-white transition-colors hover:text-mainGreen-400"
               >Sign up</NuxtLink
             >
           </div>
