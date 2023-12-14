@@ -6,7 +6,11 @@
           <h1 class="text-xl">Sign up</h1>
           <div class="ml-4 text-sm text-neutral-500">
             Already have an account?
-            <NuxtLink to="/login" class="text-white">Log In</NuxtLink>
+            <NuxtLink
+              to="/login"
+              class="text-white transition-colors hover:text-mainGreen-400"
+              >Log In</NuxtLink
+            >
           </div>
         </div>
       </template>
@@ -54,7 +58,7 @@
           color="primary"
           variant="solid"
           size="md"
-          label="Sign up"
+          label="Create account"
           :loading="pending"
         />
 
