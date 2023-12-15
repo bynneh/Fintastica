@@ -79,8 +79,7 @@
           to activate your account.
         </p>
         <p class="mb-6 text-neutral-400">
-          <span class="text-white">If the link is not there</span>, please check
-          your spam folder.
+          If the link is not there, please check your spam folder.
         </p>
         <UButton label="Try again" @click="clear" />
       </div>
@@ -156,27 +155,30 @@ async function signUp() {
       // Define the transactions
       const transactions = [
         {
-          category: 'Groceries',
-          description: 'Weekly groceries',
-          amount: 100,
+          category: 'Salary',
+          amount: 2950,
+          type: 'Icome',
           user_id: data.user.id,
         },
         {
           category: 'Rent',
           description: 'Monthly apartment rent',
           amount: 1200,
+          type: 'Expense',
           user_id: data.user.id,
         },
         {
           category: 'Utilities',
           description: 'Electricity bill',
           amount: 200,
+          type: 'Expense',
           user_id: data.user.id,
         },
         {
           category: 'Entertainment',
           description: 'Movie tickets',
           amount: 50,
+          type: 'Expense',
           user_id: data.user.id,
         },
       ]

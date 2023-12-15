@@ -10,4 +10,5 @@ definePageMeta({
   layout: 'default',
 })
 useRedirectIfAuthenticated()
+useRedirectIfAnon()
 </script>
