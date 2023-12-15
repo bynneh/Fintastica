@@ -152,6 +152,42 @@ async function signUp() {
       },
     })
     if (error) throw error
+
+    // Define the transactions
+    const transactions = [
+      {
+        category: 'Groceries',
+        description: 'Weekly groceries',
+        amount: 100,
+        user_id: user.id,
+      },
+      {
+        category: 'Rent',
+        description: 'Monthly apartment rent',
+        amount: 1200,
+        user_id: user.id,
+      },
+      {
+        category: 'Utilities',
+        description: 'Electricity bill',
+        amount: 200,
+        user_id: user.id,
+      },
+      {
+        category: 'Entertainment',
+        description: 'Movie tickets',
+        amount: 50,
+        user_id: user.id,
+      },
+    ]
+
+    // Insert the transactions into the user's database
+    const { error: insertError } = await supabase
+      .from('transactions')
+      .insert(transactions)
+
+    if (insertError) throw insertError
+
     successMsg.value = 'Check your email to confirm your account.'
   } catch (error) {
     errorMsg.value = error.message
