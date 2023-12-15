@@ -11,7 +11,9 @@
 </template>
 
 <script setup>
-useRedirectIfAnon()
+setTimeout(() => {
+  useRedirectIfAnon()
+}, 2000)
 useSeoMeta({
   title: 'Settings - Fintastica',
   description: 'Manage your Fintastica account settings.',
