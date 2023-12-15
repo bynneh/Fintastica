@@ -99,6 +99,7 @@ useSeoMeta({
 
 import { z } from 'zod'
 const supabase = useSupabaseClient()
+const redirectUrl = useRuntimeConfig().public.baseUrl
 
 const state = reactive({
   email: undefined,
@@ -146,7 +147,7 @@ async function signUp() {
           ],
           categoriesIncome: ['Salary', 'Rental Income'],
         },
-        emailRedirectTo: 'https://fintastica.space/confirm',
+        emailRedirectTo: `${redirectUrl}/confirm`,
       },
     })
     if (error) throw error

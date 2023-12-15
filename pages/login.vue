@@ -106,6 +106,7 @@ const supabase = useSupabaseClient()
 const router = useRouter()
 const toast = useToast()
 const isReset = ref(false)
+const redirectUrl = useRuntimeConfig().public.baseUrl
 
 const state = reactive({
   email: undefined,
@@ -148,7 +149,7 @@ async function resetPassword() {
     const { error } = await supabase.auth.resetPasswordForEmail(
       resetState.email,
       {
-        redirectTo: 'https://fintastica.space/settings/password-update',
+        redirectTo: `${redirectUrl}/settings/password-update`,
       },
     )
     if (error) {
@@ -174,6 +175,9 @@ async function resetPassword() {
   } finally {
     pending.value = false
     resetState.email = undefined
+    errorMsg.value = undefined
+    state.email = undefined
+    state.password = undefined
   }
 }
 </script>
