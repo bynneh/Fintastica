@@ -287,11 +287,7 @@ watch(
 )
 
 // Initialization
-if (user.value) {
-  await refresh().catch((error) =>
-    console.error('Failed to refresh data:', error),
-  )
-} else {
-  console.error('User data not available')
-}
+await refresh().catch((error) =>
+  console.error('Failed to refresh data:', error),
+)
 </script>
