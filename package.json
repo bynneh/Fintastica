@@ -26,6 +26,6 @@
   "dependencies": {
     "@nuxt/ui": "^2.11.1",
     "chart.js": "^4.4.1",
-    "vue-chartjs": "^5.2.0"
+    "vue-chartjs": "^5.3.0"
   }
 }
