@@ -3,7 +3,7 @@
     <UCard class="w-[28rem] shadow-2xl">
       <template #header>
         <div class="flex items-center justify-between">
-          <h1 class="text-xl">Create account</h1>
+          <h1 class="text-xl">Sign up</h1>
           <div class="ml-4 text-sm text-neutral-500">
             Already have an account?
             <NuxtLink
@@ -132,10 +132,9 @@ function clear() {
 async function signUp() {
   pending.value = true
   try {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: state.email,
       password: state.password,
-
       options: {
         data: {
           categoriesExpense: [
@@ -153,40 +152,44 @@ async function signUp() {
     })
     if (error) throw error
 
-    // Define the transactions
-    const transactions = [
-      {
-        category: 'Groceries',
-        description: 'Weekly groceries',
-        amount: 100,
-        user_id: user.id,
-      },
-      {
-        category: 'Rent',
-        description: 'Monthly apartment rent',
-        amount: 1200,
-        user_id: user.id,
-      },
-      {
-        category: 'Utilities',
-        description: 'Electricity bill',
-        amount: 200,
-        user_id: user.id,
-      },
-      {
-        category: 'Entertainment',
-        description: 'Movie tickets',
-        amount: 50,
-        user_id: user.id,
-      },
-    ]
+    if (data && data.user) {
+      // Define the transactions
+      const transactions = [
+        {
+          category: 'Groceries',
+          description: 'Weekly groceries',
+          amount: 100,
+          user_id: data.user.id,
+        },
+        {
+          category: 'Rent',
+          description: 'Monthly apartment rent',
+          amount: 1200,
+          user_id: data.user.id,
+        },
+        {
+          category: 'Utilities',
+          description: 'Electricity bill',
+          amount: 200,
+          user_id: data.user.id,
+        },
+        {
+          category: 'Entertainment',
+          description: 'Movie tickets',
+          amount: 50,
+          user_id: data.user.id,
+        },
+      ]
 
-    // Insert the transactions into the user's database
-    const { error: insertError } = await supabase
-      .from('transactions')
-      .insert(transactions)
+      // Insert the transactions into the user's database
+      const { error: insertError } = await supabase
+        .from('transactions')
+        .insert(transactions)
 
-    if (insertError) throw insertError
+      if (insertError) throw insertError
+    } else {
+      console.log('User is not defined')
+    }
 
     successMsg.value = 'Check your email to confirm your account.'
   } catch (error) {
