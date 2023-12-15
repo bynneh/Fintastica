@@ -79,7 +79,8 @@
           to activate your account.
         </p>
         <p class="mb-6 text-neutral-400">
-          If the link is not there, please check your spam folder.
+          If the link is not there, please check your spam folder. If the link
+          is not there, please check your spam folder.
         </p>
         <UButton label="Try again" @click="clear" />
       </div>
@@ -165,6 +166,7 @@ async function signUp() {
           description: 'Monthly apartment rent',
           amount: 1200,
           type: 'Expense',
+          type: 'Expense',
           user_id: data.user.id,
         },
         {
@@ -172,12 +174,14 @@ async function signUp() {
           description: 'Electricity bill',
           amount: 200,
           type: 'Expense',
+          type: 'Expense',
           user_id: data.user.id,
         },
         {
           category: 'Entertainment',
           description: 'Movie tickets',
           amount: 50,
+          type: 'Expense',
           type: 'Expense',
           user_id: data.user.id,
         },
