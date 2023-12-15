@@ -86,7 +86,10 @@ const items = [
     {
       label: 'Settings',
       icon: 'i-heroicons-cog-8-tooth',
-      click: () => navigateTo('/settings/profile'),
+      click: () => {
+        navigateTo('/settings/profile')
+        toggleDropdown()
+      },
     },
     {
       label: 'Sign out',
