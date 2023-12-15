@@ -287,9 +287,7 @@ watch(
 )
 
 // Initialization
-onMounted(async () => {
-  await refresh().catch((error) =>
-    console.error('Failed to refresh data:', error),
-  )
-})
+await refresh().catch((error) =>
+  console.error('Failed to refresh data:', error),
+)
 </script>
