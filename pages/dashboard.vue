@@ -134,6 +134,7 @@
 <!-- ---------------- -->
 
 <script setup>
+useRedirectIfAnon()
 useSeoMeta({
   title: 'Dashboard - Fintastica',
   description:
