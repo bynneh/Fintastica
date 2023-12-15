@@ -3,7 +3,7 @@
     <UCard class="w-[28rem] shadow-2xl">
       <template #header>
         <div class="flex items-center justify-between">
-          <h1 class="text-xl">Sign up</h1>
+          <h1 class="text-xl">Create account</h1>
           <div class="ml-4 text-sm text-neutral-500">
             Already have an account?
             <NuxtLink
