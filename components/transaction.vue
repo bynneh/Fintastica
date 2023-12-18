@@ -50,6 +50,8 @@ const props = defineProps({
   transaction: Object,
 })
 
+const isOpen = ref(false)
+
 const selectedCurrency = useState('sharedSelectedCurrency')
 const emit = defineEmits([
   'deleted',
@@ -70,8 +72,6 @@ const { currency: formattedCurrency } = useCurrency(
   toRef(props.transaction.amount, 'amount'),
   selectedCurrency,
 )
-
-const isOpen = ref(false)
 
 const isLoading = ref(false)
 const toast = useToast()

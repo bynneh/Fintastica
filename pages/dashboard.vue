@@ -157,7 +157,7 @@ const initialEndDay = () => {
 
 const user = useSupabaseUser()
 
-const isOpen = useState('sharedIsOpen', () => false)
+const isOpen = ref(false)
 const selectedYear = useState('sharedSelectedYear', () => now.getFullYear())
 const selectedMonth = useState('sharedSelectedMonth', () => now.getMonth())
 const selectedStartDay = useState('sharedSelectedStartDay', () => 1)

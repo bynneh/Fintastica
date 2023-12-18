@@ -143,6 +143,12 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  modelValue: Boolean,
+})
+
+const isOpen = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value),
 })
 
 const isEditing = computed(() => {
@@ -162,10 +168,9 @@ const isEditing = computed(() => {
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()
-const isOpen = useState('sharedIsOpen')
 const isLoading = ref(false)
 const isLoadingDel = ref(false)
-const emit = defineEmits(['saved'])
+const emit = defineEmits(['saved', 'update:modelValue'])
 const selectedCurrency = useState('sharedSelectedCurrency')
 
 const categoriesExpense = computed(
