@@ -33,7 +33,6 @@ export default {
           900: '#485a0d',
           950: '#253300',
         },
-
         mainRed: {
           50: '#fff3f1',
           100: '#ffe4e0',
@@ -46,6 +45,15 @@ export default {
           800: '#a32311',
           900: '#872315',
           950: '#4a0d05',
+        },
+        mainBlackBg: {
+          DEFAULT: '#1D1D1E',
+        },
+        mainBlackInput: {
+          DEFAULT: '#262627',
+        },
+        mainBlackRing: {
+          DEFAULT: '#323233',
         },
       },
     },
