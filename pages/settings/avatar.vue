@@ -1,34 +1,32 @@
 <template>
-  <div>
-    <h1 class="mb-6 text-4xl">Avatar</h1>
-    <div class="mb-4">
-      <UFormGroup class="w-full" help="This would be blank by default">
-        <Avatar :w="100" :h="100" />
-      </UFormGroup>
-    </div>
-
-    <div class="mb-4">
-      <UFormGroup
-        label="New avatar"
-        class="w-full"
-        name="avatar"
-        help="After choosing an image click Save to upload the new avatar"
-      >
-        <UInput type="file" ref="fileInput" />
-      </UFormGroup>
-    </div>
-
-    <UButton
-      type="submit"
-      color="primary"
-      variant="solid"
-      label="Save"
-      :size="isMobile ? 'xl' : 'md'"
-      :loading="uploading"
-      :disabled="uploading"
-      @click="saveAvatar"
-    />
+  <h1 class="mb-6 text-4xl font-semibold">Avatar</h1>
+  <div class="mb-4">
+    <UFormGroup class="w-full" help="This would be blank by default">
+      <Avatar :w="100" :h="100" />
+    </UFormGroup>
   </div>
+
+  <div class="mb-4">
+    <UFormGroup
+      label="New avatar"
+      class="w-full"
+      name="avatar"
+      help="After choosing an image click Save to upload the new avatar"
+    >
+      <UInput type="file" ref="fileInput" />
+    </UFormGroup>
+  </div>
+
+  <UButton
+    type="submit"
+    color="primary"
+    variant="solid"
+    label="Save"
+    :size="isMobile ? 'xl' : 'md'"
+    :loading="uploading"
+    :disabled="uploading"
+    @click="saveAvatar"
+  />
 </template>
 
 <script setup>

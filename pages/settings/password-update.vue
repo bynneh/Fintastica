@@ -1,43 +1,42 @@
 <template>
-  <div>
-    <UForm :state="state" :schema="schema" @submit="updatePassword">
-      <!-- New Password -->
-      <UFormGroup label="New Password" name="password" class="mb-4" required>
-        <UInput
-          icon="i-heroicons-finger-print"
-          type="password"
-          placeholder="Enter your new password"
-          v-model="state.password"
-          :size="isMobile ? 'xl' : 'md'"
-        />
-      </UFormGroup>
-
-      <!-- Confirm New Password -->
-      <UFormGroup
-        label="Confirm New Password"
-        name="confirmPassword"
-        class="mb-4"
-        required
-      >
-        <UInput
-          icon="i-heroicons-finger-print"
-          type="password"
-          placeholder="Confirm your new password"
-          v-model="state.confirmPassword"
-          :size="isMobile ? 'xl' : 'md'"
-        />
-      </UFormGroup>
-
-      <UButton
-        type="submit"
-        color="primary"
-        variant="solid"
+  <h1 class="mb-6 text-4xl font-semibold">Update password</h1>
+  <UForm :state="state" :schema="schema" @submit="updatePassword">
+    <!-- New Password -->
+    <UFormGroup label="New Password" name="password" class="mb-4" required>
+      <UInput
+        icon="i-heroicons-finger-print"
+        type="password"
+        placeholder="Enter your new password"
+        v-model="state.password"
         :size="isMobile ? 'xl' : 'md'"
-        label="Update Password"
-        :loading="pending"
       />
-    </UForm>
-  </div>
+    </UFormGroup>
+
+    <!-- Confirm New Password -->
+    <UFormGroup
+      label="Confirm New Password"
+      name="confirmPassword"
+      class="mb-4"
+      required
+    >
+      <UInput
+        icon="i-heroicons-finger-print"
+        type="password"
+        placeholder="Confirm your new password"
+        v-model="state.confirmPassword"
+        :size="isMobile ? 'xl' : 'md'"
+      />
+    </UFormGroup>
+
+    <UButton
+      type="submit"
+      color="primary"
+      variant="solid"
+      :size="isMobile ? 'xl' : 'md'"
+      label="Update Password"
+      :loading="pending"
+    />
+  </UForm>
 </template>
 <script setup>
 import { z } from 'zod'

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mb-6 text-4xl">Profile</h1>
+  <h1 class="mb-6 text-4xl font-semibold">Profile</h1>
   <div class="mb-3">
     <span class="text-sm text-gray-500">Full Name: </span
     >{{ currentName || 'Choose your name' }}

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="mb-6 text-4xl">Settings</h1>
+  <h1 class="mb-6 text-4xl font-semibold">Settings</h1>
 
   <h2 class="mb-4 text-xl">Choose your currency</h2>
   <USelectMenu
