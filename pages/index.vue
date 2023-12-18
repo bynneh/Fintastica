@@ -1,20 +1,16 @@
 <template>
   <div>
     <section
-      class="mt-14 flex flex-col items-center justify-center text-center xs:mt-16 md:mt-24 lg:mt-32"
+      class="mt-12 flex flex-col items-center justify-center text-center xs:mt-16 md:mt-24 lg:mt-32"
     >
-      <img
-        src="/logo.svg"
-        alt="Fintastica"
-        class="mb-6 h-7 w-auto duration-700 animate-in fade-in slide-in-from-bottom"
-      />
+      <img src="/logo.svg" alt="Fintastica" class="mb-6 h-7 w-auto" />
       <span
-        class="mb-6 text-[2.2rem] font-semibold leading-tight duration-500 animate-in fade-in slide-in-from-bottom xs:text-[2.8rem] sm:text-[3.2rem] md:text-[3.8rem] lg:mb-9 lg:text-[4.2rem] xl:mb-11 xl:text-[4.6rem]"
+        class="mb-6 text-[2.2rem] font-semibold leading-tight xs:text-[2.8rem] sm:text-[3.2rem] md:text-[3.8rem] lg:mb-9 lg:text-[4.2rem] xl:mb-11 xl:text-[4.6rem]"
         >Take charge of your<br />financial life with Fintastica</span
       >
 
       <span
-        class="mb-10 w-10/12 text-base font-normal leading-6 text-[#858585] duration-700 animate-in fade-in slide-in-from-bottom md:text-lg lg:mb-14 xl:mb-16 xl:text-xl"
+        class="mb-10 w-10/12 text-base font-normal leading-6 text-[#858585] md:text-lg lg:mb-14 xl:mb-16 xl:text-xl"
         >Empower your financial decisions with intuitive tracking and
         easy-to-use tools. <span class="text-white">Fintastica</span> makes
         managing income and expenses straightforward and stress-free.</span
@@ -22,33 +18,27 @@
 
       <nuxt-link
         to="/login"
-        class="mb-11 flex h-16 w-full items-center justify-center rounded-lg bg-gradient-to-r from-mainGreen-400 to-[#E2F966] px-8 text-sm font-semibold uppercase text-[#24280C] shadow-2xl shadow-[rgba(226,249,102,0.40)] transition-all duration-700 animate-in fade-in slide-in-from-bottom hover:shadow-[rgba(226,249,102,0.65)] sm:w-96"
+        class="mb-11 flex h-16 w-full items-center justify-center rounded-lg bg-gradient-to-r from-mainGreen-400 to-[#E2F966] px-8 text-sm font-semibold uppercase text-[#24280C] shadow-2xl shadow-[rgba(226,249,102,0.40)] transition-all hover:shadow-[rgba(226,249,102,0.65)] sm:w-96"
       >
         Go to dashboard
       </nuxt-link>
 
-      <div
-        class="mb-12 w-72 text-neutral-500 duration-700 animate-in fade-in slide-in-from-bottom md:mb-24 xl:mb-32"
-      >
+      <div class="mb-12 w-72 text-neutral-500 md:mb-24 xl:mb-32">
         <span class="text-white">Simplify</span> your finances – Quick sign-up,
         long lasting benefits.
       </div>
 
       <div class="relative w-full">
+        <NuxtImg
+          src="v1702287876/app-screen_efybnw.png"
+          alt="Screenshot of Fintastica app interface"
+          placeholder
+          class="relative left-1/2 z-10 block h-auto w-full max-w-none -translate-x-1/2 transform lg:w-[calc(100%+8rem)] xl:w-[calc(100%+19rem)]"
+        />
         <div
-          class="durat duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom"
-        >
-          <NuxtImg
-            src="v1702287876/app-screen_efybnw.png"
-            alt="Screenshot of Fintastica app interface"
-            class="relative left-1/2 z-10 block h-auto w-full max-w-none -translate-x-1/2 transform lg:w-[calc(100%+8rem)] xl:w-[calc(100%+19rem)]"
-          />
-
-          <div
-            class="absolute left-1/2 top-0 h-48 w-full -translate-x-1/2 transform rounded-full bg-[#E1FA62] opacity-[0.50] sm:top-[16rem] sm:mt-8 sm:h-[45rem] sm:w-[53rem] sm:-translate-y-1/2 sm:opacity-[0.20]"
-            style="filter: blur(190px)"
-          ></div>
-        </div>
+          class="absolute left-1/2 top-0 h-48 w-full -translate-x-1/2 transform rounded-full bg-[#E1FA62] opacity-[0.50] sm:top-[16rem] sm:mt-8 sm:h-[45rem] sm:w-[53rem] sm:-translate-y-1/2 sm:opacity-[0.20]"
+          style="filter: blur(190px)"
+        ></div>
       </div>
     </section>
 
