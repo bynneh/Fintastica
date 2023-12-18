@@ -102,7 +102,7 @@ export default defineAppConfig({
 
     // Toast
     notification: {
-      background: 'dark:bg-[#181819]',
+      background: 'dark:bg-mainBlackBg',
       ring: 'dark:ring-mainBlackRing',
     },
   },

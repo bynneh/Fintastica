@@ -14,9 +14,6 @@ export default {
 
       xl: '1280px',
       // => @media (min-width: 1280px) { ... }
-
-      '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
     },
     extend: {
       colors: {
@@ -58,4 +55,5 @@ export default {
       },
     },
   },
+  plugins: [require('tailwindcss-animate')],
 }
