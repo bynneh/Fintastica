@@ -5,7 +5,7 @@
   <USelectMenu
     class="mb-7"
     v-model="selectedCurrency"
-    :options="['EUR', 'USD', 'RUB']"
+    :options="['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD']"
     :size="isMobile ? 'xl' : 'md'"
   />
 
