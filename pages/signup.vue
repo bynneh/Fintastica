@@ -24,6 +24,7 @@
             placeholder="email@mail.com"
             v-model="state.email"
             autocomplete="email"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -35,6 +36,7 @@
             placeholder="Enter your password"
             v-model="state.password"
             autocomplete="password"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -50,6 +52,7 @@
             type="password"
             placeholder="Confirm your password"
             v-model="state.confirmPassword"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -57,7 +60,7 @@
           type="submit"
           color="primary"
           variant="solid"
-          size="md"
+          :size="isMobile ? 'xl' : 'md'"
           label="Create account"
           :loading="pending"
         />
@@ -81,7 +84,11 @@
         <p class="mb-6 text-neutral-400">
           If the link is not there, please check your spam folder.
         </p>
-        <UButton label="Try again" @click="clear" />
+        <UButton
+          label="Try again"
+          :size="isMobile ? 'xl' : 'md'"
+          @click="clear"
+        />
       </div>
     </UCard>
   </section>
@@ -98,6 +105,7 @@ useSeoMeta({
 })
 
 import { z } from 'zod'
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const redirectUrl = useRuntimeConfig().public.baseUrl
 
@@ -172,13 +180,6 @@ async function signUp() {
           category: 'Utilities',
           description: 'Electricity bill',
           amount: 200,
-          type: 'Expense',
-          user_id: data.user.id,
-        },
-        {
-          category: 'Entertainment',
-          description: 'Movie tickets',
-          amount: 50,
           type: 'Expense',
           user_id: data.user.id,
         },

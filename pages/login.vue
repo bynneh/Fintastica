@@ -24,6 +24,7 @@
             placeholder="email@mail.com"
             v-model="state.email"
             autocomplete="email"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -35,6 +36,7 @@
             placeholder="Enter your password"
             v-model="state.password"
             autocomplete="current-password"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -43,7 +45,7 @@
             type="submit"
             color="primary"
             variant="solid"
-            size="md"
+            :size="isMobile ? 'xl' : 'md'"
             label="Log in"
             :loading="pending"
           />
@@ -68,6 +70,7 @@
             type="text"
             placeholder="email@mail.com"
             v-model="resetState.email"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -76,7 +79,7 @@
             type="submit"
             color="primary"
             variant="solid"
-            size="md"
+            :size="isMobile ? 'xl' : 'md'"
             label="Reset password"
             :loading="pending"
           /><NuxtLink
@@ -102,6 +105,7 @@ useSeoMeta({
 })
 
 import { z } from 'zod'
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const router = useRouter()
 const toast = useToast()

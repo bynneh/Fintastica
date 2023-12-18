@@ -23,7 +23,7 @@
       color="primary"
       variant="solid"
       label="Save"
-      size="md"
+      :size="isMobile ? 'xl' : 'md'"
       :loading="uploading"
       :disabled="uploading"
       @click="saveAvatar"
@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()

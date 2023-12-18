@@ -8,6 +8,7 @@
           type="password"
           placeholder="Enter your new password"
           v-model="state.password"
+          :size="isMobile ? 'xl' : 'md'"
         />
       </UFormGroup>
 
@@ -23,6 +24,7 @@
           type="password"
           placeholder="Confirm your new password"
           v-model="state.confirmPassword"
+          :size="isMobile ? 'xl' : 'md'"
         />
       </UFormGroup>
 
@@ -30,7 +32,7 @@
         type="submit"
         color="primary"
         variant="solid"
-        size="md"
+        :size="isMobile ? 'xl' : 'md'"
         label="Update Password"
         :loading="pending"
       />
@@ -39,6 +41,7 @@
 </template>
 <script setup>
 import { z } from 'zod'
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const toast = useToast()
 const pending = ref(false)

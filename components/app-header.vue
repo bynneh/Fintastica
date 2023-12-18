@@ -16,7 +16,7 @@
       ref="dropdownRef"
       v-if="isAuthenticated"
     >
-      <div class="flex items-center gap-x-2 xs:gap-x-4" @click="toggleDropdown">
+      <div class="flex items-center gap-x-3 xs:gap-x-4" @click="toggleDropdown">
         <div
           class="flex items-center gap-x-1 text-xs text-neutral-400 xs:gap-x-2 xs:text-sm"
         >

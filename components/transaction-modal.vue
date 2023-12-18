@@ -17,7 +17,7 @@
             type="number"
             placeholder="Amount"
             v-model.number="state.amount"
-            size="xl"
+            :size="isMobile ? 'xl' : 'md'"
           >
             <template #trailing>
               <span class="text-xs text-gray-500 dark:text-gray-400">{{
@@ -41,7 +41,7 @@
               placeholder="Select transaction type"
               :options="types"
               v-model="state.type"
-              size="xl"
+              :size="isMobile ? 'xl' : 'md'"
             />
           </UFormGroup>
           <!-- Category for Income -->
@@ -57,7 +57,7 @@
               placeholder="Select category"
               :options="categoriesIncome"
               v-model="state.category"
-              size="xl"
+              :size="isMobile ? 'xl' : 'md'"
             />
           </UFormGroup>
 
@@ -74,7 +74,7 @@
               placeholder="Select category"
               :options="categoriesExpense"
               v-model="state.category"
-              size="xl"
+              :size="isMobile ? 'xl' : 'md'"
             />
           </UFormGroup>
         </div>
@@ -89,7 +89,7 @@
           <UInput
             placeholder="Description"
             v-model="state.description"
-            size="xl"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -104,7 +104,7 @@
             type="date"
             icon="i-heroicons-calendar-days-20-solid"
             v-model="inputDate"
-            size="xl"
+            :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
 
@@ -113,7 +113,7 @@
             type="submit"
             color="primary"
             variant="solid"
-            size="md"
+            :size="isMobile ? 'xl' : 'md'"
             :label="isEditing ? 'Save' : 'Add transaction'"
             :loading="isLoading"
           />
@@ -136,7 +136,7 @@ import { z } from 'zod'
 import { types } from '~/constants'
 import { format, isSameDay, endOfDay } from 'date-fns'
 
-const isMobile = useMediaQuery('(max-width: 465px)')
+const isMobile = useIsMobile()
 
 const props = defineProps({
   transaction: {

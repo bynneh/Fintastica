@@ -6,6 +6,7 @@
     class="mb-7"
     v-model="selectedCurrency"
     :options="['EUR', 'USD', 'RUB']"
+    :size="isMobile ? 'xl' : 'md'"
   />
 
   <!-- Expense Categories -->
@@ -21,12 +22,14 @@
           v-model="stateExpense.newExpenseCategory"
           placeholder="Add new Expense Category"
           class="w-full"
+          :size="isMobile ? 'xl' : 'md'"
         />
         <UButton
           icon="i-heroicons-plus-circle"
           type="submit"
           color="primary"
-          label="Add category"
+          label="Add"
+          :size="isMobile ? 'xl' : 'md'"
         />
       </div>
     </UFormGroup>
@@ -35,7 +38,7 @@
       <li
         v-for="(category, index) in state.categoriesExpense"
         :key="`expense-${index}`"
-        class="mb-2 flex items-center justify-between border-b py-2 text-sm dark:border-[#2B2B2B]"
+        class="mb-2 flex items-center justify-between border-b py-2 pr-3 text-sm dark:border-[#2B2B2B]"
       >
         <div>{{ category }}</div>
         <div>
@@ -62,11 +65,13 @@
           v-model="stateIncome.newIncomeCategory"
           placeholder="Add new Income Category"
           class="w-full"
+          :size="isMobile ? 'xl' : 'md'"
         />
         <UButton
           icon="i-heroicons-plus-circle"
           type="submit"
-          label="Add category"
+          label="Add"
+          :size="isMobile ? 'xl' : 'md'"
         />
       </div>
     </UFormGroup>
@@ -74,7 +79,7 @@
       <li
         v-for="(category, index) in state.categoriesIncome"
         :key="`income-${index}`"
-        class="mb-2 flex items-center justify-between border-b py-2 dark:border-[#2B2B2B]"
+        class="mb-2 flex items-center justify-between border-b py-2 pr-3 dark:border-[#2B2B2B]"
       >
         <div>{{ category }}</div>
         <div>
@@ -91,7 +96,7 @@
 
 <script setup>
 import { z } from 'zod'
-
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()

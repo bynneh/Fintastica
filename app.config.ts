@@ -80,7 +80,7 @@ export default defineAppConfig({
       },
     },
 
-    // Card
+    // Modal
     modal: {
       rounded: 'rounded-2xl',
       overlay: {
@@ -88,9 +88,9 @@ export default defineAppConfig({
       },
     },
 
-    // verticalNavigation
+    // VerticalNavigation
     verticalNavigation: {
-      padding: 'px-5 py-3',
+      padding: 'px-4 py-3',
       rounded: 'rounded-lg',
       base: 'before:rounded-lg dark:hover:bg-[#222223]',
       active: 'rounded-lg dark:hover:bg-[#222223]',

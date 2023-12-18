@@ -10,6 +10,7 @@
         icon="i-heroicons-user"
         v-model="inputName"
         placeholder="Enter your new name"
+        :size="isMobile ? 'xl' : 'md'"
       />
     </UFormGroup>
 
@@ -22,13 +23,14 @@
         icon="i-heroicons-at-symbol"
         v-model="inputEmail"
         placeholder="Enter your new Email"
+        :size="isMobile ? 'xl' : 'md'"
       />
     </UFormGroup>
 
     <UButton
       type="submit"
       color="primary"
-      size="md"
+      :size="isMobile ? 'xl' : 'md'"
       variant="solid"
       label="Save"
       :loading="pending"
@@ -38,7 +40,7 @@
 
 <script setup>
 import { z } from 'zod'
-
+const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const pending = ref(false)
