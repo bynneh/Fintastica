@@ -99,5 +99,11 @@ export default defineAppConfig({
     skeleton: {
       background: 'bg-neutral-800',
     },
+
+    // Toast
+    notification: {
+      background: 'dark:bg-[#181819]',
+      ring: 'dark:ring-mainBlackRing',
+    },
   },
 })
