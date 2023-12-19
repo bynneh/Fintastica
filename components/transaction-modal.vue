@@ -1,5 +1,5 @@
 <template>
-  <UModal v-model="isOpen" :fullscreen="isMobile">
+  <LazyUModal v-model="isOpen" :fullscreen="isMobile">
     <UCard>
       <template #header
         ><div class="flex items-center justify-between">
@@ -128,7 +128,7 @@
         </div>
       </UForm>
     </UCard>
-  </UModal>
+  </LazyUModal>
 </template>
 
 <script setup>
