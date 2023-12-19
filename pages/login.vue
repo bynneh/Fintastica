@@ -176,49 +176,13 @@ const categoriesData = {
 }
 
 async function signInWithOAuth(provider) {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider,
-    data: categoriesData,
     options: {
-      redirectTo: `${redirectUrl}/confirm`,
+      redirectTo: `${redirectUrl}/confirm?accepted=true`,
     },
   })
   if (error) console.log(error.message)
-
-  if (data && data.user) {
-    // Define the transactions
-    const transactions = [
-      {
-        category: 'Salary',
-        amount: 2950,
-        type: 'Income',
-        user_id: data.user.id,
-      },
-      {
-        category: 'Rent',
-        description: 'Monthly apartment rent',
-        amount: 1200,
-        type: 'Expense',
-        user_id: data.user.id,
-      },
-      {
-        category: 'Utilities',
-        description: 'Electricity bill',
-        amount: 200,
-        type: 'Expense',
-        user_id: data.user.id,
-      },
-    ]
-
-    // Insert the transactions into the user's database
-    const { error: insertError } = await supabase
-      .from('transactions')
-      .insert(transactions)
-
-    if (insertError) throw insertError
-  } else {
-    console.log('User is not defined')
-  }
 }
 
 const signInWithGithub = () => signInWithOAuth('github')

@@ -36,7 +36,7 @@ const user = useSupabaseUser()
 const toast = useToast()
 
 const uploading = ref(false)
-const fileInput = ref()
+const fileInput = ref(null)
 
 // File resize and webp convert
 
@@ -112,7 +112,11 @@ const saveAvatar = async () => {
     })
 
     // 4. (OPTIONALLY) remove the old avatar file
-    if (currentAvatarUrl) {
+    if (
+      currentAvatarUrl &&
+      !currentAvatarUrl.includes('githubusercontent.com') &&
+      !currentAvatarUrl.includes('googleusercontent.com')
+    ) {
       const { error } = await supabase.storage
         .from('avatars')
         .remove([currentAvatarUrl])

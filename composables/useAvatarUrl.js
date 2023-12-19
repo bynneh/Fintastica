@@ -1,34 +1,46 @@
 export const useAvatarUrl = () => {
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
+  const url = ref(null)
 
   const getPublicUrl = () => {
-    const avatarUrl = user.value?.user_metadata?.avatar_url
+    if (
+      !user.value ||
+      !user.value.user_metadata ||
+      !user.value.user_metadata.avatar_url
+    ) {
+      return null
+    }
 
-    // Check if the user has GitHub authorization
-    if (avatarUrl.includes('githubusercontent.com')) {
+    const avatarUrl = user.value.user_metadata.avatar_url
+
+    // Check if the user has GitHub or Google authorization
+    if (
+      avatarUrl.includes('githubusercontent.com') ||
+      avatarUrl.includes('googleusercontent.com')
+    ) {
       return avatarUrl
     }
 
-    // Check if the user has Google authorization
-    if (avatarUrl.includes('googleusercontent.com')) {
-      return avatarUrl
-    }
-
-    // Check if a new avatar has been uploaded to storage
     const { data, error } = supabase.storage
       .from('avatars')
       .getPublicUrl(avatarUrl)
-    if (!error && data) {
-      return data.publicUrl
+
+    if (error) {
+      console.error('Error getting public URL:', error)
+      return null
     }
 
-    return null
+    return data?.publicUrl || null
   }
 
-  const url = ref(getPublicUrl())
-
-  watch(user, () => (url.value = getPublicUrl()), { immediate: true })
+  watch(
+    user,
+    () => {
+      url.value = getPublicUrl()
+    },
+    { immediate: true },
+  )
 
   return { url }
 }

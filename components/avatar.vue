@@ -14,7 +14,7 @@ const props = defineProps({
 const user = useSupabaseUser()
 const { url } = useAvatarUrl()
 
-const hasAvatar = computed(() => Boolean(url.value))
+const hasAvatar = computed(() => !!url.value)
 
 const avatarStyles = computed(() => ({
   borderRadius: '50%',
