@@ -4,14 +4,14 @@ export const useAvatarUrl = () => {
 
   const getPublicUrl = () => {
     const avatarUrl = user.value?.user_metadata?.avatar_url
-    const githubAuth =
-      user.value?.user_metadata?.iss === 'https://api.github.com'
 
     // Check if the user has GitHub authorization
-    if (
-      githubAuth &&
-      avatarUrl.startsWith('https://avatars.githubusercontent.com')
-    ) {
+    if (avatarUrl.includes('githubusercontent.com')) {
+      return avatarUrl
+    }
+
+    // Check if the user has Google authorization
+    if (avatarUrl.includes('googleusercontent.com')) {
       return avatarUrl
     }
 
