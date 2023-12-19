@@ -41,14 +41,26 @@
         </UFormGroup>
 
         <div class="flex items-center justify-between">
-          <UButton
-            type="submit"
-            color="primary"
-            variant="solid"
-            :size="isMobile ? 'xl' : 'md'"
-            label="Log in"
-            :loading="pending"
-          />
+          <div class="flex items-center justify-between gap-x-2">
+            <UButton
+              type="submit"
+              color="primary"
+              variant="solid"
+              :size="isMobile ? 'xl' : 'md'"
+              label="Log in"
+              :loading="pending"
+            />
+            <div
+              class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100"
+              @click="signInWithGithub"
+            >
+              <img
+                src="/github-mark.svg"
+                alt="Github logo"
+                class="h-[1.4rem] transition-opacity hover:opacity-100"
+              />
+            </div>
+          </div>
           <NuxtLink
             @click="isReset = !isReset"
             class="cursor-pointer text-sm text-neutral-500 transition-colors hover:text-white"
@@ -130,6 +142,17 @@ const resetSchema = z.object({
 
 const errorMsg = ref(null)
 const pending = ref(false)
+
+// OAuth
+
+async function signInWithGithub() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+  })
+  if (error) console.log(error.message)
+}
+
+// Password login
 
 async function signIn() {
   pending.value = true
