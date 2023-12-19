@@ -44,7 +44,7 @@
         <UFormGroup
           label="Confirm Password"
           name="confirmPassword"
-          class="mb-4"
+          class="mb-6"
           required
         >
           <UInput

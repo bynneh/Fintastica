@@ -29,7 +29,7 @@
         </UFormGroup>
 
         <!-- Password -->
-        <UFormGroup label="Password" name="password" class="mb-4" required>
+        <UFormGroup label="Password" name="password" class="mb-6" required>
           <UInput
             icon="i-heroicons-finger-print"
             type="password"
@@ -41,7 +41,7 @@
         </UFormGroup>
 
         <div class="flex items-center justify-between">
-          <div class="flex items-center justify-between gap-x-2">
+          <div class="flex items-center justify-between gap-x-1 xs:gap-x-2">
             <UButton
               type="submit"
               color="primary"
@@ -51,7 +51,11 @@
               :loading="pending"
             />
             <div
-              class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100"
+              :class="
+                isMobile
+                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+              "
               @click="signInWithGithub"
             >
               <img
@@ -61,7 +65,11 @@
               />
             </div>
             <div
-              class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100"
+              :class="
+                isMobile
+                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+              "
               @click="signInWithGoogle"
             >
               <img
@@ -153,29 +161,68 @@ const resetSchema = z.object({
 const errorMsg = ref(null)
 const pending = ref(false)
 
-// Github
+// OAuth login
 
-async function signInWithGithub() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'github',
+const categoriesData = {
+  categoriesExpense: [
+    'Food and Groceries',
+    'Transportation',
+    'Housing',
+    'Entertainment',
+    'Clothing',
+    'Healthcare',
+  ],
+  categoriesIncome: ['Salary', 'Rental Income'],
+}
+
+async function signInWithOAuth(provider) {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    data: categoriesData,
     options: {
       redirectTo: `${redirectUrl}/confirm`,
     },
   })
   if (error) console.log(error.message)
+
+  if (data && data.user) {
+    // Define the transactions
+    const transactions = [
+      {
+        category: 'Salary',
+        amount: 2950,
+        type: 'Income',
+        user_id: data.user.id,
+      },
+      {
+        category: 'Rent',
+        description: 'Monthly apartment rent',
+        amount: 1200,
+        type: 'Expense',
+        user_id: data.user.id,
+      },
+      {
+        category: 'Utilities',
+        description: 'Electricity bill',
+        amount: 200,
+        type: 'Expense',
+        user_id: data.user.id,
+      },
+    ]
+
+    // Insert the transactions into the user's database
+    const { error: insertError } = await supabase
+      .from('transactions')
+      .insert(transactions)
+
+    if (insertError) throw insertError
+  } else {
+    console.log('User is not defined')
+  }
 }
 
-// Google
-
-async function signInWithGoogle() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: `${redirectUrl}/confirm`,
-    },
-  })
-  if (error) console.log(error.message)
-}
+const signInWithGithub = () => signInWithOAuth('github')
+const signInWithGoogle = () => signInWithOAuth('google')
 
 // Password login
 
