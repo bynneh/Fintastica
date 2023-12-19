@@ -95,8 +95,8 @@ const items = [
       label: 'Sign out',
       icon: 'i-heroicons-arrow-left-on-rectangle',
       click: async () => {
+        navigateTo('/login')
         await supabase.auth.signOut()
-        window.location.reload()
       },
     },
   ],

@@ -1,12 +1,5 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  image: {
-    format: ['webp'],
-    provider: 'cloudinary',
-    cloudinary: {
-      baseURL: 'https://res.cloudinary.com/drwinsusg/image/upload/',
-    },
-  },
   app: {
     head: {
       htmlAttrs: {
@@ -43,5 +36,12 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: 'dark',
+  },
+  image: {
+    format: ['webp'],
+    provider: 'cloudinary',
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/drwinsusg/image/upload/',
+    },
   },
 })
