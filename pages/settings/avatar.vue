@@ -95,7 +95,7 @@ const saveAvatar = async () => {
     const fileName = `${crypto.randomUUID()}.${fileExt}`
 
     // 1. Grab the current avatar URL
-    const currentAvatarUrl = user.value.user_metadata?.avatar_url
+    const currentAvatarUrl = user.value.user_metadata?.user_avatar
 
     // 2. Upload the image to avatars bucket
     const { error } = await supabase.storage
@@ -107,7 +107,7 @@ const saveAvatar = async () => {
     // 3. Update the user metadata with the avatar URL
     await supabase.auth.updateUser({
       data: {
-        avatar_url: fileName,
+        user_avatar: fileName,
       },
     })
 

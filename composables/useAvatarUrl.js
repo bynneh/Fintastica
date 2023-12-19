@@ -4,33 +4,22 @@ export const useAvatarUrl = () => {
   const url = ref(null)
 
   const getPublicUrl = () => {
+    const avatarUrl =
+      user.value?.user_metadata?.user_avatar ||
+      user.value?.user_metadata?.avatar_url
     if (
-      !user.value ||
-      !user.value.user_metadata ||
-      !user.value.user_metadata.avatar_url
-    ) {
-      return null
-    }
-
-    const avatarUrl = user.value.user_metadata.avatar_url
-
-    // Check if the user has GitHub or Google authorization
-    if (
+      !avatarUrl ||
       avatarUrl.includes('githubusercontent.com') ||
       avatarUrl.includes('googleusercontent.com')
     ) {
       return avatarUrl
     }
-
     const { data, error } = supabase.storage
       .from('avatars')
       .getPublicUrl(avatarUrl)
-
     if (error) {
       console.error('Error getting public URL:', error)
-      return null
     }
-
     return data?.publicUrl || null
   }
 
