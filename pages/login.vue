@@ -148,6 +148,9 @@ const pending = ref(false)
 async function signInWithGithub() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
+    options: {
+      redirectTo: `${redirectUrl}/confirm`,
+    },
   })
   if (error) console.log(error.message)
 }

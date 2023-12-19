@@ -1,19 +1,29 @@
 export const useAvatarUrl = () => {
-  // Get the current user metadata - which contain name of avatar image
-  // Public URL of that image
-  // Watch user for any changes - so we always display image of the user
-
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
 
   const getPublicUrl = () => {
-    if (!user.value?.user_metadata?.avatar_url) return null
+    const avatarUrl = user.value?.user_metadata?.avatar_url
+    const githubAuth =
+      user.value?.user_metadata?.iss === 'https://api.github.com'
 
-    const { data } = supabase.storage
+    // Check if the user has GitHub authorization
+    if (
+      githubAuth &&
+      avatarUrl.startsWith('https://avatars.githubusercontent.com')
+    ) {
+      return avatarUrl
+    }
+
+    // Check if a new avatar has been uploaded to storage
+    const { data, error } = supabase.storage
       .from('avatars')
-      .getPublicUrl(user.value?.user_metadata?.avatar_url)
+      .getPublicUrl(avatarUrl)
+    if (!error && data) {
+      return data.publicUrl
+    }
 
-    return data.publicUrl
+    return null
   }
 
   const url = ref(getPublicUrl())
