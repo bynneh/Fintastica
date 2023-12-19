@@ -60,6 +60,16 @@
                 class="h-[1.4rem] transition-opacity hover:opacity-100"
               />
             </div>
+            <div
+              class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100"
+              @click="signInWithGoogle"
+            >
+              <img
+                src="/googleLogo.svg"
+                alt="Google logo"
+                class="h-[1.4rem] transition-opacity hover:opacity-100"
+              />
+            </div>
           </div>
           <NuxtLink
             @click="isReset = !isReset"
@@ -143,11 +153,23 @@ const resetSchema = z.object({
 const errorMsg = ref(null)
 const pending = ref(false)
 
-// OAuth
+// Github
 
 async function signInWithGithub() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'github',
+    options: {
+      redirectTo: `${redirectUrl}/confirm`,
+    },
+  })
+  if (error) console.log(error.message)
+}
+
+// Google
+
+async function signInWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
     options: {
       redirectTo: `${redirectUrl}/confirm`,
     },
@@ -172,6 +194,8 @@ async function signIn() {
     pending.value = false
   }
 }
+
+// Reset password
 
 async function resetPassword() {
   pending.value = true
