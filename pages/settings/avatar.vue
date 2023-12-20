@@ -24,7 +24,6 @@
     label="Save"
     :size="isMobile ? 'xl' : 'md'"
     :loading="uploading"
-    :disabled="uploading"
     @click="saveAvatar"
   />
 </template>
@@ -112,11 +111,7 @@ const saveAvatar = async () => {
     })
 
     // 4. (OPTIONALLY) remove the old avatar file
-    if (
-      currentAvatarUrl &&
-      !currentAvatarUrl.includes('githubusercontent.com') &&
-      !currentAvatarUrl.includes('googleusercontent.com')
-    ) {
+    if (currentAvatarUrl) {
       const { error } = await supabase.storage
         .from('avatars')
         .remove([currentAvatarUrl])

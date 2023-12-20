@@ -84,6 +84,7 @@ onMounted(async () => {
       try {
         await updateUser()
         await insertTransactions()
+        window.location.reload()
       } catch (error) {
         // Handle error
         console.error('Error in onMounted:', error)
