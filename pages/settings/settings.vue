@@ -130,6 +130,9 @@ const schemaIncome = z.object({
   newIncomeCategory: z.string().max(20).optional(),
 })
 
+// Zod schema for currency validation
+const schemaCurrency = z.enum(['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD'])
+
 // Function to save categories to Supabase
 const saveCategories = async () => {
   pending.value = true
@@ -146,7 +149,11 @@ const saveCategories = async () => {
       icon: 'i-heroicons-check-circle',
     })
   } catch (error) {
-    console.error('Error saving categories:', error.message)
+    toast.add({
+      title: 'Error saving currency',
+      description: error.message,
+      color: 'red',
+    })
   } finally {
     pending.value = false
   }
@@ -208,6 +215,9 @@ const deleteIncomeCategory = async (index) => {
 
 const saveCurrency = async (newCurrency) => {
   try {
+    // Validate the currency
+    schemaCurrency.parse(newCurrency)
+
     const { error } = await supabase.auth.updateUser({
       data: {
         selectedCurrency: newCurrency,
