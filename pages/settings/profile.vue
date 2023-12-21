@@ -169,7 +169,7 @@ const saveEmail = async () => {
   pendingEmail.value = true
 
   try {
-    await updateUser({ data: { email: state.value.email } })
+    await updateUser({ email: state.value.email })
     toast.add({
       title: 'Success',
       description: `Check your new email: ${state.value.email} to confirm`,

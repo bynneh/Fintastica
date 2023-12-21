@@ -11,7 +11,7 @@
     />
     <UButton
       label="Save"
-      @click="saveCurrencyOnClick"
+      @click="saveCurrency"
       :size="isMobile ? 'xl' : 'md'"
       class="self-start"
       :loading="pendingCurrency"
@@ -105,10 +105,13 @@
 
 <script setup>
 import { z } from 'zod'
+
 const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()
+
+// Initializing state variables
 const pendingCurrency = ref(false)
 const pending = ref(false)
 const selectedCurrency = useState(
@@ -116,48 +119,38 @@ const selectedCurrency = useState(
   () => user.value.user_metadata?.selectedCurrency ?? 'EUR',
 )
 
-// Define the state
 const state = ref({
   categoriesExpense: user.value.user_metadata?.categoriesExpense ?? [],
   categoriesIncome: user.value.user_metadata?.categoriesIncome ?? [],
 })
 
-const stateExpense = ref({
-  newExpenseCategory: '',
-})
+const stateExpense = ref({ newExpenseCategory: '' })
+const stateIncome = ref({ newIncomeCategory: '' })
 
-// Zod schema for category validation
+// Defining validation schemas
 const schemaExpense = z.object({
   newExpenseCategory: z.string().max(20).optional(),
 })
-
-const stateIncome = ref({
-  newIncomeCategory: '',
-})
-
-// Zod schema for category validation
 const schemaIncome = z.object({
   newIncomeCategory: z.string().max(20).optional(),
 })
-
-// Zod schema for currency validation
 const schemaCurrency = z.enum(['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD'])
 
-// Function to save categories to Supabase
+// Function to update categories in the database
+const updateCategories = async (categories) => {
+  const { error } = await supabase.auth.updateUser({ data: categories })
+  if (error) throw error
+}
+
+// Function to save categories
 const saveCategories = async () => {
   pending.value = true
   try {
-    const { error } = await supabase.auth.updateUser({
-      data: {
-        categoriesExpense: state.value.categoriesExpense,
-        categoriesIncome: state.value.categoriesIncome,
-      },
+    await updateCategories({
+      categoriesExpense: state.value.categoriesExpense,
+      categoriesIncome: state.value.categoriesIncome,
     })
-    if (error) throw error
-    toast.add({
-      title: 'Categories updated',
-      icon: 'i-heroicons-check-circle',
-    })
+    toast.add({ title: 'Categories updated', icon: 'i-heroicons-check-circle' })
   } catch (error) {
     toast.add({
       title: 'Error saving currency',
@@ -169,88 +162,65 @@ const saveCategories = async () => {
   }
 }
 
-// Add a new expense category and save
-const addExpenseCategory = async () => {
-  if (
-    stateExpense.value.newExpenseCategory &&
-    !state.value.categoriesExpense.includes(
-      stateExpense.value.newExpenseCategory,
-    )
-  ) {
-    state.value.categoriesExpense.unshift(stateExpense.value.newExpenseCategory)
-    stateExpense.value.newExpenseCategory = ''
-    await saveCategories()
+// Function to add a new category
+const addCategory = async (categoryState, categoryList) => {
+  const newCategory = categoryState.value.newExpenseCategory
+  if (newCategory) {
+    if (categoryList.includes(newCategory)) {
+      toast.add({
+        title: 'Category already exists',
+        icon: 'i-heroicons-exclamation-circle',
+        color: 'red',
+      })
+    } else {
+      categoryList.unshift(newCategory)
+      categoryState.value.newExpenseCategory = ''
+      await saveCategories()
+    }
   }
 }
 
-// Delete an expense category and save
-const deleteExpenseCategory = async (index) => {
-  if (state.value.categoriesExpense.length > 1) {
-    state.value.categoriesExpense.splice(index, 1)
+// Function to delete a category
+const deleteCategory = async (index, categoryList) => {
+  if (categoryList.length > 1) {
+    categoryList.splice(index, 1)
     await saveCategories()
   } else {
     toast.add({
-      title: 'At least one expense category is required',
+      title: 'At least one category is required',
       icon: 'i-heroicons-exclamation-circle',
       color: 'red',
     })
   }
 }
 
-// Add a new income category and save
-const addIncomeCategory = async () => {
-  if (
-    stateIncome.value.newIncomeCategory &&
-    !state.value.categoriesIncome.includes(stateIncome.value.newIncomeCategory)
-  ) {
-    state.value.categoriesIncome.unshift(stateIncome.value.newIncomeCategory)
-    stateIncome.value.newIncomeCategory = ''
-    await saveCategories()
-  }
-}
+// Function to add an expense category
+const addExpenseCategory = () =>
+  addCategory(stateExpense, state.value.categoriesExpense)
 
-// Delete an income category and save
-const deleteIncomeCategory = async (index) => {
-  if (state.value.categoriesIncome.length > 1) {
-    state.value.categoriesIncome.splice(index, 1)
-    await saveCategories()
-  } else {
-    toast.add({
-      title: 'At least one income category is required',
-      icon: 'i-heroicons-exclamation-circle',
-      color: 'red',
-    })
-  }
-}
+// Function to delete an expense category
+const deleteExpenseCategory = (index) =>
+  deleteCategory(index, state.value.categoriesExpense)
 
-const saveCurrencyOnClick = async () => {
+// Function to add an income category
+const addIncomeCategory = () =>
+  addCategory(stateIncome, state.value.categoriesIncome)
+
+// Function to delete an income category
+const deleteIncomeCategory = (index) =>
+  deleteCategory(index, state.value.categoriesIncome)
+
+// Function to save selected currency
+const saveCurrency = async () => {
   try {
     pendingCurrency.value = true
-    await saveCurrency(selectedCurrency.value)
+    schemaCurrency.parse(selectedCurrency.value)
+    await updateCategories({ selectedCurrency: selectedCurrency.value })
+    toast.add({ title: 'Currency updated', icon: 'i-heroicons-check-circle' })
   } catch (error) {
     console.error('Error saving currency:', error.message)
   } finally {
     pendingCurrency.value = false
-  }
-}
-
-const saveCurrency = async (newCurrency) => {
-  try {
-    // Validate the currency
-    schemaCurrency.parse(newCurrency)
-
-    const { error } = await supabase.auth.updateUser({
-      data: {
-        selectedCurrency: newCurrency,
-      },
-    })
-    if (error) throw error
-    toast.add({
-      title: 'Currency updated',
-      icon: 'i-heroicons-check-circle',
-    })
-  } catch (error) {
-    console.error('Error saving currency:', error.message)
   }
 }
 </script>
