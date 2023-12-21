@@ -2,12 +2,21 @@
   <h1 class="mb-6 text-4xl font-semibold">Settings</h1>
 
   <h2 class="mb-4 text-xl">Choose your currency</h2>
-  <USelectMenu
-    class="mb-7"
-    v-model="selectedCurrency"
-    :options="['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD']"
-    :size="isMobile ? 'xl' : 'md'"
-  />
+  <div class="flex gap-x-3">
+    <USelectMenu
+      class="mb-7 flex-1"
+      v-model="selectedCurrency"
+      :options="['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD']"
+      :size="isMobile ? 'xl' : 'md'"
+    />
+    <UButton
+      label="Save"
+      @click="saveCurrencyOnClick"
+      :size="isMobile ? 'xl' : 'md'"
+      class="self-start"
+      :loading="pendingCurrency"
+    />
+  </div>
 
   <!-- Expense Categories -->
   <h2 class="mb-4 text-xl">Expense Categories</h2>
@@ -100,6 +109,7 @@ const isMobile = useIsMobile()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()
+const pendingCurrency = ref(false)
 const pending = ref(false)
 const selectedCurrency = useState(
   'sharedSelectedCurrency',
@@ -213,6 +223,17 @@ const deleteIncomeCategory = async (index) => {
   }
 }
 
+const saveCurrencyOnClick = async () => {
+  try {
+    pendingCurrency.value = true
+    await saveCurrency(selectedCurrency.value)
+  } catch (error) {
+    console.error('Error saving currency:', error.message)
+  } finally {
+    pendingCurrency.value = false
+  }
+}
+
 const saveCurrency = async (newCurrency) => {
   try {
     // Validate the currency
@@ -232,8 +253,4 @@ const saveCurrency = async (newCurrency) => {
     console.error('Error saving currency:', error.message)
   }
 }
-
-watch(selectedCurrency, (newCurrency) => {
-  saveCurrency(newCurrency)
-})
 </script>

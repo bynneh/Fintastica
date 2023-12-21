@@ -94,7 +94,7 @@
         :schema="resetSchema"
         @submit="resetPassword"
       >
-        <UFormGroup label="Email" name="email" class="mb-4" required>
+        <UFormGroup label="Email" name="email" class="mb-5" required>
           <UInput
             icon="i-heroicons-at-symbol "
             type="text"
@@ -103,7 +103,11 @@
             :size="isMobile ? 'xl' : 'md'"
           />
         </UFormGroup>
-
+        <div class="mb-6 text-sm font-normal text-neutral-500">
+          A link to password reset will be sent to your email. <br />For your
+          security, this link is only valid
+          <span class="text-white">in this browser</span>.
+        </div>
         <div class="flex items-center">
           <UButton
             type="submit"
@@ -163,18 +167,6 @@ const pending = ref(false)
 
 // OAuth login
 
-const categoriesData = {
-  categoriesExpense: [
-    'Food and Groceries',
-    'Transportation',
-    'Housing',
-    'Entertainment',
-    'Clothing',
-    'Healthcare',
-  ],
-  categoriesIncome: ['Salary', 'Rental Income'],
-}
-
 async function signInWithOAuth(provider) {
   const { error } = await supabase.auth.signInWithOAuth({
     provider,
@@ -214,7 +206,7 @@ async function resetPassword() {
     const { error } = await supabase.auth.resetPasswordForEmail(
       resetState.email,
       {
-        redirectTo: `${redirectUrl}/settings/password-update`,
+        redirectTo: `${redirectUrl}/confirm?resetPassword=true`,
       },
     )
     if (error) {

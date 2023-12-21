@@ -12,6 +12,7 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const route = useRoute()
+const router = useRouter()
 const user = useSupabaseUser()
 
 // Define categories data outside of the onMounted hook
@@ -78,22 +79,24 @@ const insertTransactions = async () => {
 
 onMounted(async () => {
   const accepted = route.query.accepted
-  if (accepted && user.value) {
-    // Check if data has been filled upon sign up
-    if (!user.value.user_metadata?.dataFilledUponSignUp) {
-      try {
-        await updateUser()
-        await insertTransactions()
-        window.location.reload()
-      } catch (error) {
-        // Handle error
-        console.error('Error in onMounted:', error)
-      }
+  const passwordReset = route.query.resetPassword
+  try {
+    if (
+      accepted &&
+      user.value &&
+      !user.value.user_metadata?.dataFilledUponSignUp
+    ) {
+      await updateUser()
+      await insertTransactions()
+      window.location.reload()
+    } else if (passwordReset) {
+      router.push('/reset-password')
+    } else {
+      useRedirectIfAuthenticated()
+      useRedirectIfAnon()
     }
+  } catch (error) {
+    console.error('Error in onMounted:', error)
   }
-
-  // Redirect logic
-  useRedirectIfAuthenticated()
-  useRedirectIfAnon()
 })
 </script>
