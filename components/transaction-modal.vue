@@ -136,7 +136,7 @@ import { z } from 'zod'
 import { types } from '~/constants'
 import { format, isSameDay, endOfDay } from 'date-fns'
 
-const isMobile = useIsMobile()
+const { isMobile } = useDevice()
 
 const props = defineProps({
   transaction: {

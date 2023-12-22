@@ -73,7 +73,7 @@
 import { z } from 'zod'
 
 // Hooks and refs
-const isMobile = useIsMobile()
+const { isMobile } = useDevice()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()

@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/fontaine',
     '@nuxt/image',
+    '@nuxtjs/device',
   ],
   runtimeConfig: {
     public: {

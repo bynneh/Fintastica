@@ -139,7 +139,7 @@ useSeoMeta({
 })
 
 import { z } from 'zod'
-const isMobile = useIsMobile()
+const { isMobile } = useDevice()
 const supabase = useSupabaseClient()
 const router = useRouter()
 const toast = useToast()

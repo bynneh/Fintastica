@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-const isMobile = useIsMobile()
+const { isMobile } = useDevice()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const toast = useToast()
