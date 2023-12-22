@@ -53,29 +53,29 @@
             <div
               :class="
                 isMobile
-                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
-                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white p-[0.5rem] opacity-90 transition-all hover:opacity-100'
+                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white p-[0.37rem] opacity-90 transition-all hover:opacity-100'
               "
               @click="signInWithGithub"
             >
-              <img
-                src="/github-mark.svg"
+              <NuxtImg
+                src="v1703226799/github-mark_xmwrah.svg"
                 alt="Github logo"
-                class="h-[1.4rem] transition-opacity hover:opacity-100"
+                class="transition-opacity hover:opacity-100"
               />
             </div>
             <div
               :class="
                 isMobile
-                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
-                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white opacity-90 transition-all hover:opacity-100'
+                  ? 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-white p-[0.5rem] opacity-90 transition-all hover:opacity-100'
+                  : 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-white p-[0.37rem] opacity-90 transition-all hover:opacity-100'
               "
               @click="signInWithGoogle"
             >
-              <img
-                src="/googleLogo.svg"
+              <NuxtImg
+                src="v1703226798/googleLogo_vjgbkq.svg"
                 alt="Google logo"
-                class="h-[1.4rem] transition-opacity hover:opacity-100"
+                class="transition-opacity hover:opacity-100"
               />
             </div>
           </div>

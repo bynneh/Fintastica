@@ -3,7 +3,11 @@
     <section
       class="mt-12 flex flex-col items-center justify-center text-center xs:mt-16 md:mt-24 lg:mt-32"
     >
-      <img src="/logo.svg" alt="Fintastica" class="mb-6 h-7 w-auto" />
+      <NuxtImg
+        src="v1703227212/logo_eeipf7.svg"
+        alt="Fintastica"
+        class="mb-6 h-7 w-auto"
+      />
       <span
         class="mb-6 text-[2.2rem] font-semibold leading-tight xs:text-[2.8rem] sm:text-[3.2rem] md:text-[3.8rem] lg:mb-9 lg:text-[4.2rem] xl:mb-11 xl:text-[4.6rem]"
         >Take charge of your<br />financial life with Fintastica</span
@@ -74,8 +78,8 @@
             >hello@fintastica.space</a
           >
           <a href="https://github.com/bynneh/Fintastica" target="_blank">
-            <img
-              src="/github-mark.svg"
+            <NuxtImg
+              src="v1703226799/github-mark_xmwrah.svg"
               alt="Github logo"
               class="h-8 opacity-30 transition-opacity hover:opacity-100"
             />

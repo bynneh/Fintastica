@@ -7,7 +7,11 @@
           : '/dashboard'
       "
     >
-      <img src="/logo.svg" alt="Fintastica" class="h-7 w-auto" />
+      <NuxtImg
+        src="v1703227212/logo_eeipf7.svg"
+        alt="Fintastica"
+        class="h-7 w-auto"
+      />
     </NuxtLink>
 
     <UDropdown
