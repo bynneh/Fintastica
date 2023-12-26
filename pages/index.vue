@@ -6,7 +6,9 @@
       <NuxtImg
         src="v1703227212/logo_eeipf7.svg"
         alt="Fintastica"
-        class="mb-6 h-7 w-auto"
+        class="mb-8"
+        width="134"
+        height="33"
       />
       <span
         class="mb-6 text-[2.2rem] font-semibold leading-tight xs:text-[2.8rem] sm:text-[3.2rem] md:text-[3.8rem] lg:mb-9 lg:text-[4.2rem] xl:mb-11 xl:text-[4.6rem]"
@@ -34,10 +36,13 @@
 
       <div class="relative w-full">
         <NuxtImg
+          preload
+          placeholder
           src="v1702287876/app-screen_efybnw.png"
           alt="Screenshot of Fintastica app interface"
-          placeholder
-          class="relative left-1/2 z-10 block h-auto w-full max-w-none -translate-x-1/2 transform lg:w-[calc(100%+8rem)] xl:w-[calc(100%+19rem)]"
+          sizes="92vw lg:1264"
+          height="670"
+          class="relative left-1/2 z-10 block h-auto max-w-none -translate-x-1/2 transform lg:w-[calc(100%+8rem)] xl:w-[calc(100%+19rem)]"
         />
         <div
           class="absolute left-1/2 top-0 h-48 w-full -translate-x-1/2 transform rounded-full bg-[#E1FA62] opacity-[0.50] sm:top-[16rem] sm:mt-8 sm:h-[45rem] sm:w-[53rem] sm:-translate-y-1/2 sm:opacity-[0.20]"
@@ -81,7 +86,9 @@
             <NuxtImg
               src="v1703226799/github-mark_xmwrah.svg"
               alt="Github logo"
-              class="h-8 opacity-30 transition-opacity hover:opacity-100"
+              class="opacity-30 transition-opacity hover:opacity-100"
+              width="34"
+              height="33"
             />
           </a>
         </div>
