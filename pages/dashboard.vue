@@ -134,6 +134,9 @@
 <!-- ---------------- -->
 
 <script setup>
+import { yearOptions, monthOptions } from '~/constants'
+import { getDaysInMonth } from 'date-fns'
+
 useRedirectIfAnon()
 useSeoMeta({
   title: 'Dashboard - Fintastica',
@@ -141,10 +144,8 @@ useSeoMeta({
     'View your financial summary, transactions, and trends on the Fintastica Dashboard.',
 })
 
-import { yearOptions, monthOptions } from '~/constants'
-import { getDaysInMonth } from 'date-fns'
-
 const now = new Date()
+const user = useSupabaseUser()
 
 // Helper function to determine the initial end day
 const initialEndDay = () => {
@@ -154,8 +155,6 @@ const initialEndDay = () => {
     ? now.getDate()
     : daysInCurrentMonth
 }
-
-const user = useSupabaseUser()
 
 const isOpen = ref(false)
 const selectedYear = useState('sharedSelectedYear', () => now.getFullYear())
