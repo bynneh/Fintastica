@@ -28,7 +28,7 @@
     <UFormGroup class="mb-5" name="newExpenseCategory">
       <div class="flex space-x-2">
         <UInput
-          v-model="stateExpense.newExpenseCategory"
+          v-model="stateExpense.newCategory"
           placeholder="Add new Expense Category"
           class="w-full"
           :size="isMobile ? 'xl' : 'md'"
@@ -71,7 +71,7 @@
     <UFormGroup class="mb-5" name="newIncomeCategory">
       <div class="flex space-x-2">
         <UInput
-          v-model="stateIncome.newIncomeCategory"
+          v-model="stateIncome.newCategory"
           placeholder="Add new Income Category"
           class="w-full"
           :size="isMobile ? 'xl' : 'md'"
@@ -124,15 +124,15 @@ const state = ref({
   categoriesIncome: user.value.user_metadata?.categoriesIncome ?? [],
 })
 
-const stateExpense = ref({ newExpenseCategory: '' })
-const stateIncome = ref({ newIncomeCategory: '' })
+const stateExpense = ref({ newCategory: '' })
+const stateIncome = ref({ newCategory: '' })
 
 // Defining validation schemas
 const schemaExpense = z.object({
-  newExpenseCategory: z.string().max(20).optional(),
+  newCategory: z.string().max(20).optional(),
 })
 const schemaIncome = z.object({
-  newIncomeCategory: z.string().max(20).optional(),
+  newCategory: z.string().max(20).optional(),
 })
 const schemaCurrency = z.enum(['EUR', 'USD', 'RUB', 'JPY', 'GBP', 'AUD'])
 
@@ -164,7 +164,7 @@ const saveCategories = async () => {
 
 // Function to add a new category
 const addCategory = async (categoryState, categoryList) => {
-  const newCategory = categoryState.value.newExpenseCategory
+  const newCategory = categoryState.value.newCategory
   if (newCategory) {
     if (categoryList.includes(newCategory)) {
       toast.add({
@@ -174,7 +174,7 @@ const addCategory = async (categoryState, categoryList) => {
       })
     } else {
       categoryList.unshift(newCategory)
-      categoryState.value.newExpenseCategory = ''
+      categoryState.value.newCategory = ''
       await saveCategories()
     }
   }
