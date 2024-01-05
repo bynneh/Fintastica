@@ -16,17 +16,17 @@
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/supabase": "^1.1.5",
     "@vueuse/nuxt": "^10.7.1",
-    "date-fns": "^3.0.6",
-    "nuxt": "^3.9.0",
+    "date-fns": "^3.2.0",
+    "nuxt": "^3.9.1",
     "nuxt-security": "^1.0.0",
     "prettier": "^3.1.1",
-    "prettier-plugin-tailwindcss": "^0.5.10",
-    "vue": "^3.4.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "vue": "^3.4.7",
     "vue-router": "^4.2.5",
     "zod": "^3.22.4"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.11.1",
+    "@nuxt/ui": "^2.12.0",
     "chart.js": "^4.4.1",
     "vue-chartjs": "^5.3.0"
   }
