@@ -10,9 +10,11 @@ useHead({
       href: 'https://fonts.googleapis.com',
     },
     {
-      rel: 'stylesheet',
+      rel: 'preload',
       href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap',
-      crossorigin: '',
+      as: 'style',
+      onload: "this.onload=null;this.rel='stylesheet'",
+      crossOrigin: 'anonymous',
     },
   ],
 })
