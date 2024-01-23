@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/fontaine',
     '@nuxt/image',
+    '@nuxtjs/google-fonts',
     '@nuxtjs/device',
   ],
   runtimeConfig: {
@@ -34,6 +35,13 @@ export default defineNuxtConfig({
   },
   fontMetrics: {
     fonts: ['Outfit'],
+  },
+  googleFonts: {
+    families: {
+      Outfit: [400, 600, 700],
+    },
+    preload: true,
+    display: 'swap',
   },
   colorMode: {
     preference: 'dark',
