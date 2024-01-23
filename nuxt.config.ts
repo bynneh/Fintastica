@@ -19,13 +19,12 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
-    '@nuxtjs/fontaine',
     '@nuxt/image',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/device',
   ],
   runtimeConfig: {
@@ -33,13 +32,11 @@ export default defineNuxtConfig({
       baseUrl: process.env.BASE_URL ?? 'http://localhost:3000',
     },
   },
-  fontMetrics: {
-    fonts: ['Outfit'],
-  },
   googleFonts: {
     families: {
       Outfit: [400, 600, 700],
     },
+    download: false,
     preload: true,
     display: 'swap',
   },
